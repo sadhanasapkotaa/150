@@ -1,0 +1,21 @@
+1. In PostSerializer, instead of returning the raw user foreign key ID, return the user's email and first_name.
+2. Add a read-only field comment_count to PostSerializer that counts how many comments a post has — without adding it to the model.
+3. Write a custom validate_phone method in UserSerializer that rejects phone numbers not exactly 10 digits.
+4. Make PostByUserViewSet actually filter — right now it fetches all posts. Make it return only posts belonging to a specific user via the URL.
+5. Do the same for CommentByPostViewset and CommentByUserViewset.
+6. Add search functionality to PostViewSet so /posts/?search=hello returns posts where the title contains "hello".
+Permissions
+7. Make it so only authenticated users can create a post.
+8. Make it so only the owner of a post can edit or delete it. Others can only read.
+Custom Actions
+9. Add a custom action @action on PostViewSet at /posts/{id}/like/ that increments the likes field by 1.
+10. Add a /users/{id}/followers/ endpoint that returns the list of a user's followers.
+Validation & Integrity
+11. Add model-level validation so likes and repost on Post can never go below 0.
+12. Prevent a user from following themselves.
+Pagination
+13. Add pagination to PostViewSet so it returns 10 posts per page.
+Signals
+14. Use a Django signal to automatically set likes=0 and repost=0 when a Post is created, and remove those fields from the API input entirely.
+Optimization
+15. Identify and fix the N+1 query problem that will appear when listing comments with user info.

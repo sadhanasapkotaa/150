@@ -1,0 +1,6 @@
+env/
+.envs/
+
+.env
+*.env
+*.pyc
