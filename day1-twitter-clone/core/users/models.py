@@ -26,20 +26,17 @@ class User(AbstractUser):
 class Post(models.Model):
     title = models.CharField(max_length=70)
     description = models.CharField(max_length=280)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="author")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
     likes = models.IntegerField()
     repost = models.IntegerField()
 
-    @property
     def __str__(self):
         return self.title[:10] + self.user.first_name
 
 
 class Comment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="commentor")
-    post = models.ForeignKey(
-        Post, on_delete=models.CASCADE, related_name="commented_post"
-    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
     comment = models.CharField(max_length=5000)
     comment_likes = models.IntegerField()
 

@@ -16,15 +16,15 @@ class PostByUserViewSet(ModelViewSet):
 
 
 class PostViewSet(ModelViewSet):
-    queryset = Post.objects.all()
+    queryset = Post.objects.select_related("user")
     serializer_class = PostSerializer
 
 
 class CommentByPostViewset(ModelViewSet):
-    queryset = Comment.objects.select_related("post")
+    queryset = Comment.objects.select_related("post", "user")
     serializer_class = CommentSerializer
 
 
 class CommentByUserViewset(ModelViewSet):
-    queryset = Comment.objects.select_related("user")
+    queryset = Comment.objects.select_related("user", "post")
     serializer_class = CommentSerializer

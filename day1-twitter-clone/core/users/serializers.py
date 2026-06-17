@@ -16,8 +16,21 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+    email = serializers.EmailField(source="user.email")
+    first_name = serializers.CharField(source="user.first_name")
+    comment_count = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Post
-        fields = ["title", "description", "likes", "repost", "email", "first_name"]
+        fields = [
+            "title",
+            "description",
+            "likes",
+            "repost",
+            "email",
+            "first_name",
+            "comment_count",
+        ]
+
+    def get_comment_count(self, instance):
+        return instance.comments.count()

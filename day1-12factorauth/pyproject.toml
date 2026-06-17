@@ -1,0 +1,10 @@
+[tool.black]
+skip-string-normalization = true
+line-length = 100
+exclude = "(migrations/|settings)"
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I"]
